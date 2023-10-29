@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -22,6 +23,6 @@ public class UserRole implements SuperEntity {
     @Column(name = "role_description", nullable = false)
     private String roleDescription;
 
-    @OneToMany(mappedBy = "userRoles")
-    private User user;
+    @OneToMany(mappedBy = "userRole")
+    private Set<User> users;
 }

@@ -1,10 +1,12 @@
 package com.devstack.pos;
 
+import com.devstack.pos.util.HibernateUtil;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.hibernate.Session;
 
 import java.io.IOException;
 import java.net.URL;
@@ -24,5 +26,8 @@ public class AppInitializer extends Application {
         primaryStage.setTitle("POS");
         primaryStage.centerOnScreen();
         primaryStage.show();
+
+        try(Session session = HibernateUtil.getSession()) {
+        }
     }
 }

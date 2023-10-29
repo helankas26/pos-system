@@ -25,6 +25,6 @@ public class User {
     private String activeState;
 
     @ManyToOne
-    @JoinColumn(name = "role_id")
-    private Set<UserRole> userRoles;
+    @JoinColumn(name = "user_role_id")
+    private UserRole userRole;
 }
