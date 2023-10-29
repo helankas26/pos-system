@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="511.0" prefWidth="872.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.devstack.pos.controller.LoginFormController">
+   <children>
+      <AnchorPane prefHeight="511.0" prefWidth="355.0">
+         <children>
+            <Label layoutX="138.0" layoutY="61.0" text="Welcome to" />
+            <ImageView fitHeight="53.0" fitWidth="182.0" layoutX="100.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../asserts/Wattpad_logo.png" />
+               </image>
+            </ImageView>
+            <JFXTextField labelFloat="true" layoutX="79.0" layoutY="155.0" prefHeight="31.0" prefWidth="225.0" promptText="Username" />
+            <JFXTextField labelFloat="true" layoutX="79.0" layoutY="225.0" prefHeight="31.0" prefWidth="225.0" promptText="Password" />
+            <JFXButton layoutX="79.0" layoutY="290.0" prefHeight="39.0" prefWidth="225.0" style="-fx-background-color: #2980B9;" text="Sign In" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+         </children></AnchorPane>
+      <AnchorPane layoutX="355.0" prefHeight="516.0" prefWidth="517.0">
+         <children>
+            <ImageView fitHeight="516.0" fitWidth="517.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../asserts/login.jpg" />
+               </image>
+            </ImageView>
+         </children></AnchorPane>
+   </children>
+</AnchorPane>
