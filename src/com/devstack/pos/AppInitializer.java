@@ -1,4 +1,4 @@
-package main.java.com.devstack.pos;
+package com.devstack.pos;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
