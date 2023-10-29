@@ -17,7 +17,7 @@ import java.util.Set;
 public class UserRole implements SuperEntity {
     @Id
     @Column(name = "property_id")
-    private Integer property_id;
+    private Long property_id;
     @Column(name = "role_name", nullable = false)
     private String roleName;
     @Column(name = "role_description", nullable = false)

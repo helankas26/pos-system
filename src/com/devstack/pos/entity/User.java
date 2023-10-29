@@ -14,7 +14,7 @@ import java.util.Set;
 public class User {
     @Id
     @Column(name = "property_id")
-    private Integer property_id;
+    private Long property_id;
     @Column(name = "username", nullable = false)
     private String username;
     @Column(name = "password", nullable = false)
