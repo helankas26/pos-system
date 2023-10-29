@@ -3,10 +3,7 @@ package com.devstack.pos.dao.custom.impl;
 import com.devstack.pos.dao.custom.UserRoleDao;
 import com.devstack.pos.entity.UserRole;
 import com.devstack.pos.util.HibernateUtil;
-import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.criterion.Projection;
-import org.hibernate.criterion.Projections;
 import org.hibernate.query.Query;
 
 import java.util.List;
@@ -47,7 +44,7 @@ public class UserRoleDaoImpl implements UserRoleDao {
             criteria.setProjection(Projections.rowCount());
             Long count = (Long) criteria.uniqueResult();*/
 
-            Query query = session.createQuery("SELECT COUNT(*) FROM user_role");
+            Query query = session.createQuery("SELECT COUNT(*) FROM UserRole");
             Long count = (Long) query.getSingleResult();
 
             return count > 0;

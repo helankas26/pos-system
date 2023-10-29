@@ -6,8 +6,7 @@ public class KeyGenerator {
     private static final Random RANDOM = new Random();
 
     public static long generateId() {
-        long maxvalue = Long.MAX_VALUE;
-        long minValue = 1;
-        return (long) (RANDOM.nextDouble() * minValue);
+        long maxValue= Long.MAX_VALUE;
+        return (long)(RANDOM.nextDouble()*maxValue);
     }
 }

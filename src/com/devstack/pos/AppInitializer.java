@@ -2,13 +2,17 @@ package com.devstack.pos;
 
 import com.devstack.pos.dao.custom.UserRoleDao;
 import com.devstack.pos.dao.custom.impl.UserRoleDaoImpl;
+import com.devstack.pos.entity.User;
+import com.devstack.pos.entity.UserRole;
 import com.devstack.pos.util.HibernateUtil;
+import com.devstack.pos.util.KeyGenerator;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import java.io.IOException;
 import java.net.URL;
@@ -21,6 +25,8 @@ public class AppInitializer extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
+        initializeData();
+
         URL resource = getClass().getResource("view/LoginForm.fxml");
         Parent parent = FXMLLoader.load(resource);
         Scene scene = new Scene(parent);
@@ -28,17 +34,41 @@ public class AppInitializer extends Application {
         primaryStage.setTitle("POS");
         primaryStage.centerOnScreen();
         primaryStage.show();
-
-        try(Session session = HibernateUtil.getSession()) {
-        }
     }
 
     private void initializeData() {
         UserRoleDao userRoleDao = new UserRoleDaoImpl();
         if (!userRoleDao.isExists()){
 
-        } else {
-            return;
+            try(Session session = HibernateUtil.getSession()) {
+                Transaction transaction = session.beginTransaction();
+
+                UserRole adminRole = new UserRole();
+                UserRole userRole = new UserRole();
+
+                adminRole.setPropertyId(KeyGenerator.generateId());
+                adminRole.setRoleName("ADMIN");
+                adminRole.setRoleDescription("Only for the Admin");
+
+                userRole.setPropertyId(KeyGenerator.generateId());
+                userRole.setRoleName("USER");
+                userRole.setRoleDescription("Only for the User");
+
+                // ========================================================
+                User systemUser = new User();
+                systemUser.setPropertyId(KeyGenerator.generateId());
+                systemUser.setUsername("helankas26@gmail.com");
+                systemUser.setPassword("123");
+                systemUser.setDisplayName("Helanka S");
+                systemUser.setActiveState(true);
+                systemUser.setUserRole(adminRole);
+
+                session.save(adminRole);
+                session.save(userRole);
+                session.save(systemUser);
+
+                transaction.commit();
+            }
         }
     }
 }

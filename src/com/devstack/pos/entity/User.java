@@ -3,7 +3,6 @@ package com.devstack.pos.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Getter
@@ -14,7 +13,7 @@ import java.util.Set;
 public class User {
     @Id
     @Column(name = "property_id")
-    private Long property_id;
+    private Long propertyId;
     @Column(name = "username", nullable = false)
     private String username;
     @Column(name = "password", nullable = false)
@@ -22,7 +21,7 @@ public class User {
     @Column(name = "display_name", nullable = false)
     private String displayName;
     @Column(name = "active_state")
-    private String activeState;
+    private boolean activeState;
 
     @ManyToOne
     @JoinColumn(name = "user_role_id")
