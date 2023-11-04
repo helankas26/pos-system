@@ -2,12 +2,18 @@ package com.devstack.pos.controller;
 
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.IOException;
+
 public class AdminPortalController {
+    public AnchorPane adminPortalContext;
     public ImageView menu;
     public ImageView menuClose;
     public AnchorPane overlayPane;
@@ -43,7 +49,7 @@ public class AdminPortalController {
         slide.play();
 
         slide.setOnFinished(e -> {
-            if(open) {
+            if (open) {
                 menu.setVisible(false);
                 menuClose.setVisible(true);
                 overlayPane.setVisible(true);
@@ -57,5 +63,36 @@ public class AdminPortalController {
                 menu.setDisable(false);
             }
         });
+    }
+
+    public void btnUserManagementOnAction(ActionEvent actionEvent) throws IOException {
+        setUi("UserManagement");
+    }
+
+    public void btnUserRoleAndAuthoritiesOnAction(ActionEvent actionEvent) {
+    }
+
+    public void btnIncomeAndReportOnAction(ActionEvent actionEvent) {
+    }
+
+    public void btnManageInventoryOnAction(ActionEvent actionEvent) {
+    }
+
+    public void btnCustomerManagementOnAction(ActionEvent actionEvent) {
+    }
+
+    public void btnDealsAndDiscountOnAction(ActionEvent actionEvent) {
+    }
+
+    public void btnUserActivitiesOnAction(ActionEvent actionEvent) {
+    }
+
+    public void btnReportAndStatisticsOnAction(ActionEvent actionEvent) {
+    }
+
+    private void setUi(String location) throws IOException {
+        Stage stage = (Stage) adminPortalContext.getScene().getWindow();
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/" + location + ".fxml"))));
+        stage.centerOnScreen();
     }
 }
