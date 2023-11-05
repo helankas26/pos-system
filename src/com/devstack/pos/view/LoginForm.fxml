@@ -20,7 +20,7 @@
             </ImageView>
             <JFXTextField labelFloat="true" layoutX="79.0" layoutY="155.0" prefHeight="31.0" prefWidth="225.0" promptText="Username" />
             <JFXTextField labelFloat="true" layoutX="79.0" layoutY="225.0" prefHeight="31.0" prefWidth="225.0" promptText="Password" />
-            <JFXButton layoutX="79.0" layoutY="290.0" onAction="#btnLoginOnAction" prefHeight="39.0" prefWidth="225.0" style="-fx-background-color: #2980B9;" text="Sign In" textFill="WHITE">
+            <JFXButton layoutX="79.0" layoutY="290.0" onAction="#loginOnAction" prefHeight="39.0" prefWidth="225.0" style="-fx-background-color: #2980B9;" text="Sign In" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

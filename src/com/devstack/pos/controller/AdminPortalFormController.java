@@ -12,7 +12,7 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 
-public class AdminPortalController {
+public class AdminPortalFormController {
     public AnchorPane adminPortalContext;
     public ImageView menu;
     public ImageView menuClose;
@@ -65,34 +65,34 @@ public class AdminPortalController {
         });
     }
 
-    public void btnUserManagementOnAction(ActionEvent actionEvent) throws IOException {
-        setUi("UserManagement");
-    }
-
-    public void btnUserRoleAndAuthoritiesOnAction(ActionEvent actionEvent) {
-    }
-
-    public void btnIncomeAndReportOnAction(ActionEvent actionEvent) {
-    }
-
-    public void btnManageInventoryOnAction(ActionEvent actionEvent) {
-    }
-
-    public void btnCustomerManagementOnAction(ActionEvent actionEvent) {
-    }
-
-    public void btnDealsAndDiscountOnAction(ActionEvent actionEvent) {
-    }
-
-    public void btnUserActivitiesOnAction(ActionEvent actionEvent) {
-    }
-
-    public void btnReportAndStatisticsOnAction(ActionEvent actionEvent) {
-    }
-
     private void setUi(String location) throws IOException {
         Stage stage = (Stage) adminPortalContext.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/" + location + ".fxml"))));
         stage.centerOnScreen();
+    }
+
+    public void userManagementOnAction(ActionEvent actionEvent) throws IOException {
+        setUi("UserManagementForm");
+    }
+
+    public void userRoleAndAuthoritiesOnAction(ActionEvent actionEvent) {
+    }
+
+    public void incomeAndReportOnAction(ActionEvent actionEvent) {
+    }
+
+    public void manageInventoryOnAction(ActionEvent actionEvent) {
+    }
+
+    public void customerManagementOnAction(ActionEvent actionEvent) {
+    }
+
+    public void dealsAndDiscountOnAction(ActionEvent actionEvent) {
+    }
+
+    public void userActivitiesOnAction(ActionEvent actionEvent) {
+    }
+
+    public void reportAndStatisticsOnAction(ActionEvent actionEvent) {
     }
 }
