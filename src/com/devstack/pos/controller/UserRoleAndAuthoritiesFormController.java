@@ -8,24 +8,28 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class UserManagementFormController {
-    public AnchorPane userManagementContext;
+public class UserRoleAndAuthoritiesFormController {
+    public AnchorPane UserRoleAndAuthoritiesContext;
 
     private void setUi(String location) throws IOException {
-        Stage stage = (Stage) userManagementContext.getScene().getWindow();
+        Stage stage = (Stage) UserRoleAndAuthoritiesContext.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/" + location + ".fxml"))));
         stage.centerOnScreen();
     }
 
     public void backToHomeOnMouseClicked(MouseEvent mouseEvent) throws IOException {
-        setUi("AdminPortalForm");
+        setUi("UserManagementForm");
     }
 
-    public void manageSystemUserOnMouseClicked(MouseEvent mouseEvent) throws IOException {
-        setUi("NewSystemUserForm");
+    public void manageUserRolesOnMouseClicked(MouseEvent mouseEvent) {
     }
 
-    public void newUserRoleOnMouseClicked(MouseEvent mouseEvent) throws IOException {
-        setUi("UserRoleAndAuthoritiesForm");
+    public void manageAccessPointsOnMouseClicked(MouseEvent mouseEvent) {
+    }
+
+    public void privilegesOnMouseClicked(MouseEvent mouseEvent) {
+    }
+
+    public void authoritiesOnMouseClicked(MouseEvent mouseEvent) {
     }
 }
