@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="manageUserRoleContext" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.devstack.pos.controller.ManageUserRoleFormController">
+   <children>
+      <AnchorPane prefHeight="55.0" prefWidth="1366.0" style="-fx-background-color: #34495E;">
+         <children>
+            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="20.0" layoutY="14.0" onMouseClicked="#backToHomeOnMouseClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../asserts/icons/icons8-back-48.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <Label layoutX="65.0" layoutY="14.0" text="Manage User Role" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <JFXTextField focusColor="#ffffff00" focusTraversable="false" layoutX="826.0" layoutY="12.0" prefHeight="31.0" prefWidth="268.0" promptText="Search" style="-fx-background-color: #34495E; -fx-border-color: #FFFFFF; -fx-border-radius: 20px; -fx-background-radius: 20px; -fx-text-inner-color: #FFFFFF; -fx-prompt-text-fill: #FFFFFF; -fx-padding: 0 0 0 15px;" unFocusColor="#ffffff00">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </JFXTextField>
+            <Label layoutX="1117.0" layoutY="14.0" prefHeight="25.0" prefWidth="180.0" text="Helanka S." textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="1321.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../asserts/icons/icons8-arrow-48.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <JFXTextField layoutX="20.0" layoutY="75.0" prefHeight="32.0" prefWidth="200.0" promptText="User Role Name" />
+      <JFXTextField layoutX="240.0" layoutY="75.0" prefHeight="32.0" prefWidth="420.0" promptText="Description" />
+      <JFXButton buttonType="RAISED" layoutX="680.0" layoutY="73.0" prefHeight="32.0" prefWidth="140.0" style="-fx-background-color: #3498DB;" text="Submit Data" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXTextField layoutX="20.0" layoutY="127.0" prefHeight="32.0" prefWidth="420.0" promptText="Search here" />
+      <TableView layoutX="20.0" layoutY="179.0" prefHeight="569.0" prefWidth="1326.0">
+         <columns>
+            <TableColumn prefWidth="121.00003051757812" text="#Id" />
+            <TableColumn prefWidth="250.0" text="User Role" />
+            <TableColumn prefWidth="622.0" text="Description" />
+            <TableColumn prefWidth="164.0" text="Delete" />
+            <TableColumn prefWidth="165.0" text="Modify" />
+         </columns>
+      </TableView>
+   </children>
+</AnchorPane>
