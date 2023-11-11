@@ -3,14 +3,17 @@ package com.devstack.pos.dao.custom.impl;
 import com.devstack.pos.dao.custom.UserDao;
 import com.devstack.pos.entity.User;
 import com.devstack.pos.util.HibernateUtil;
+import com.devstack.pos.util.PasswordGenerator;
+import com.devstack.pos.util.ResponseData;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import java.util.List;
 
 public class UserDaoImpl implements UserDao {
     @Override
     public boolean create(User user) {
-        try(Session session= HibernateUtil.getSession()){
+        try (Session session = HibernateUtil.getSession()) {
             session.save(user);
             session.close();
         }
@@ -35,5 +38,23 @@ public class UserDaoImpl implements UserDao {
     @Override
     public List<User> loadAll() {
         return null;
+    }
+
+    @Override
+    public ResponseData login(String username, String password) {
+        try (Session session = HibernateUtil.getSession()) {
+            Query<User> query = session.createQuery("FROM User u WHERE u.username=:username", User.class);
+            query.setParameter("username", username);
+            User user = query.uniqueResult();
+            if (user != null && user.isActiveState()) {
+                if (PasswordGenerator.checkPassword(password, user.getPassword())) {
+                    return new ResponseData(true, "Login success!");
+                } else {
+                    return new ResponseData(false, "Password is wrong!");
+                }
+            } else {
+                return new ResponseData(false, "Something went wrong with the Username or the active state, please contact the admin");
+            }
+        }
     }
 }
