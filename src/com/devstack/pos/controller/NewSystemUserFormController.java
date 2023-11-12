@@ -13,9 +13,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -94,6 +92,18 @@ public class NewSystemUserFormController {
                     updateButton
             );
             systemUserTms.add(tm);
+
+
+            deleteButton.setOnAction(e -> {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure?", ButtonType.YES, ButtonType.NO);
+                Optional<ButtonType> buttonType = alert.showAndWait();
+
+                if (buttonType.isPresent() && buttonType.get() == ButtonType.YES) {
+                    if (userBo.dropUser(tm.getUserId())) {
+                        loadAllSystemUser();
+                    }
+                }
+            });
         }
 
         tblUsers.setItems(systemUserTms);
