@@ -31,6 +31,7 @@ public class NewSystemUserFormController {
     public JFXComboBox<String> cmbUserRole;
     public JFXTextField txtUsername;
     public JFXTextField txtDisplayName;
+    public JFXTextField txtSearchText;
     public TableView<SystemUserTm> tblUsers;
     public TableColumn<SystemUserTm, Long> colId;
     public TableColumn<SystemUserTm, String> colUserRole;
@@ -60,6 +61,11 @@ public class NewSystemUserFormController {
 
         loadAllUserRoles();
         loadAllSystemUser();
+
+        txtSearchText.textProperty().addListener((observable, oldValue, newValue) -> {
+            searchText = newValue;
+            loadAllSystemUser();
+        });
     }
 
     private void loadAllUserRoles() {
