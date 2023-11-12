@@ -2,11 +2,11 @@ package com.devstack.pos.dto;
 
 import lombok.*;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
 @ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserRoleDto {
     private  Long propertyId;
     private String roleName;

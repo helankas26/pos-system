@@ -57,4 +57,12 @@ public class UserDaoImpl implements UserDao {
             }
         }
     }
+
+    @Override
+    public List<User> loadAllUsers(String searchText) {
+        try (Session session = HibernateUtil.getSession()) {
+            Query<User> userQuery = session.createQuery("FROM User", User.class);
+            return userQuery.list();
+        }
+    }
 }

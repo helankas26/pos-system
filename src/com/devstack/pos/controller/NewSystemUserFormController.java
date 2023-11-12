@@ -1,8 +1,11 @@
 package com.devstack.pos.controller;
 
 import com.devstack.pos.bo.BoFactory;
+import com.devstack.pos.bo.custom.UserBo;
 import com.devstack.pos.bo.custom.UserRoleBo;
+import com.devstack.pos.dto.UserDto;
 import com.devstack.pos.dto.UserRoleDto;
+import com.devstack.pos.view.tm.SystemUserTm;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
@@ -10,6 +13,10 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -23,14 +30,35 @@ public class NewSystemUserFormController {
     public JFXComboBox<String> cmbUserRole;
     public JFXTextField txtUsername;
     public JFXTextField txtDisplayName;
+    public TableView<SystemUserTm> tblUsers;
+    public TableColumn<SystemUserTm, Long> colId;
+    public TableColumn<SystemUserTm, String> colUserRole;
+    public TableColumn<SystemUserTm, String> colStatus;
+    public TableColumn<SystemUserTm, String> colDisplayName;
+    public TableColumn<SystemUserTm, String> colEmail;
+    public TableColumn<SystemUserTm, Button> colDelete;
+    public TableColumn<SystemUserTm, Button> colModify;
 
     private UserRoleBo userRoleBo = BoFactory.getBo(BoFactory.BoType.USER_ROLE);
+    private UserBo userBo = BoFactory.getBo(BoFactory.BoType.USER);
 
     private ObservableList<String> observableList = FXCollections.observableArrayList();
+    private ObservableList<SystemUserTm> systemUserTms = FXCollections.observableArrayList();
     private List<UserRoleDto> userRoleDtos = new ArrayList<>();
 
+    private String searchText = "";
+
     public void initialize() {
+        colId.setCellValueFactory(new PropertyValueFactory<>("userId"));
+        colUserRole.setCellValueFactory(new PropertyValueFactory<>("userRole"));
+        colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+        colDisplayName.setCellValueFactory(new PropertyValueFactory<>("displayName"));
+        colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+        colDelete.setCellValueFactory(new PropertyValueFactory<>("delete"));
+        colModify.setCellValueFactory(new PropertyValueFactory<>("modify"));
+
         loadAllUserRoles();
+        loadAllSystemUser();
     }
 
     private void loadAllUserRoles() {
@@ -40,6 +68,27 @@ public class NewSystemUserFormController {
         }
 
         cmbUserRole.setItems(observableList);
+    }
+
+    private void loadAllSystemUser() {
+        for (UserDto userDto : userBo.loadAllUsers(searchText)) {
+
+            Button deleteButton = new Button("Delete");
+            Button updateButton = new Button("Update");
+
+            SystemUserTm tm = new SystemUserTm(
+                    userDto.getPropertyId(),
+                    userDto.getUserRoleDto().getRoleName(),
+                    userDto.isActiveState() ? "Active" : "Disabled",
+                    userDto.getDisplayName(),
+                    userDto.getUsername(),
+                    deleteButton,
+                    updateButton
+            );
+            systemUserTms.add(tm);
+        }
+
+        tblUsers.setItems(systemUserTms);
     }
 
     private void setUi(String location) throws IOException {
