@@ -10,7 +10,7 @@ import javax.persistence.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class User implements SuperEntity {
     @Id
     @Column(name = "property_id")
     private Long propertyId;
