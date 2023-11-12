@@ -7,4 +7,5 @@ import java.util.List;
 public interface UserBo {
     void initializeSystem();
     List<UserDto> loadAllUsers(String searchText);
+    void createNewSystemUser(Long userRoleId, String displayName, String email);
 }

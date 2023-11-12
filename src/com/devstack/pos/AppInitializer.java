@@ -2,20 +2,11 @@ package com.devstack.pos;
 
 import com.devstack.pos.bo.BoFactory;
 import com.devstack.pos.bo.custom.UserBo;
-import com.devstack.pos.dao.custom.UserRoleDao;
-import com.devstack.pos.dao.custom.impl.UserRoleDaoImpl;
-import com.devstack.pos.entity.User;
-import com.devstack.pos.entity.UserRole;
-import com.devstack.pos.util.HibernateUtil;
-import com.devstack.pos.util.KeyGenerator;
-import com.devstack.pos.util.PasswordGenerator;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 import java.io.IOException;
 import java.net.URL;

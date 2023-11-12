@@ -24,6 +24,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class NewSystemUserFormController {
     public AnchorPane newSystemUserContext;
@@ -71,6 +72,7 @@ public class NewSystemUserFormController {
     }
 
     private void loadAllSystemUser() {
+        systemUserTms.clear();
         for (UserDto userDto : userBo.loadAllUsers(searchText)) {
 
             Button deleteButton = new Button("Delete");
@@ -89,6 +91,13 @@ public class NewSystemUserFormController {
         }
 
         tblUsers.setItems(systemUserTms);
+//        tblUsers.refresh();
+    }
+
+    private void clearAll() {
+        cmbUserRole.setValue(null);
+        txtUsername.clear();
+        txtDisplayName.clear();
     }
 
     private void setUi(String location) throws IOException {
@@ -102,5 +111,16 @@ public class NewSystemUserFormController {
     }
 
     public void createSystemUserOnAction(ActionEvent actionEvent) {
+        String userRole = cmbUserRole.getValue();
+        Optional<UserRoleDto> selectedUserRoleDto =
+                userRoleDtos.stream().filter(e -> e.getRoleName().equals(userRole)).findFirst();
+
+        String displayName = txtDisplayName.getText();
+        String userName = txtUsername.getText();
+
+        selectedUserRoleDto.ifPresent(userRoleDto -> userBo.createNewSystemUser(userRoleDto.getPropertyId(), displayName, userName));
+
+        loadAllSystemUser();
+        clearAll();
     }
 }

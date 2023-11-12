@@ -2,10 +2,13 @@ package com.devstack.pos.dao.custom.impl;
 
 import com.devstack.pos.dao.custom.UserDao;
 import com.devstack.pos.entity.User;
+import com.devstack.pos.entity.UserRole;
 import com.devstack.pos.util.HibernateUtil;
+import com.devstack.pos.util.KeyGenerator;
 import com.devstack.pos.util.PasswordGenerator;
 import com.devstack.pos.util.ResponseData;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import java.util.List;
@@ -63,6 +66,41 @@ public class UserDaoImpl implements UserDao {
         try (Session session = HibernateUtil.getSession()) {
             Query<User> userQuery = session.createQuery("FROM User", User.class);
             return userQuery.list();
+        }
+    }
+
+    @Override
+    public void createNewSystemUser(Long userRoleId, String displayName, String email) {
+        try (Session session = HibernateUtil.getSession()) {
+            // user email
+            Query<User> userQuery = session.createQuery("FROM User u WHERE u.username=:username", User.class);
+            userQuery.setParameter("username", email);
+            User user = userQuery.uniqueResult();
+
+            if (user != null) {
+                throw new RuntimeException("User Already Exists!");
+            }
+
+            // check userRole
+            Query<UserRole> userRoleQuery = session.createQuery("FROM UserRole u WHERE u.propertyId=:id", UserRole.class);
+            userRoleQuery.setParameter("id", userRoleId);
+            UserRole userRole = userRoleQuery.uniqueResult();
+
+            if (userRole == null) {
+                throw new RuntimeException("User Role not found!");
+            }
+
+            // save
+            User createdUser = new User(
+                    KeyGenerator.generateId(), email,
+                    PasswordGenerator.passwordGen(6), displayName,
+                    true, userRole
+            );
+
+            Transaction transaction = session.beginTransaction();
+            session.save(createdUser);
+            transaction.commit();
+            System.out.println(createdUser.getPassword());
         }
     }
 }
