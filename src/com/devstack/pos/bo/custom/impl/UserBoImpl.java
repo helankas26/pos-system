@@ -1,4 +1,4 @@
-package com.devstack.pos.dao.custom.impl;
+package com.devstack.pos.bo.custom.impl;
 
 import com.devstack.pos.bo.custom.UserBo;
 import com.devstack.pos.dao.DaoFactory;

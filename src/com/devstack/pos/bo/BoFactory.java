@@ -1,7 +1,6 @@
 package com.devstack.pos.bo;
 
-import com.devstack.pos.dao.custom.impl.UserBoImpl;
-import com.devstack.pos.dao.custom.impl.UserDaoImpl;
+import com.devstack.pos.bo.custom.impl.UserBoImpl;
 
 public class BoFactory {
     private BoFactory() {
