@@ -50,10 +50,10 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <JFXComboBox layoutX="20.0" layoutY="75.0" prefHeight="32.0" prefWidth="200.0" promptText="User Role" />
-      <JFXTextField layoutX="240.0" layoutY="75.0" prefHeight="32.0" prefWidth="200.0" promptText="Username" />
-      <JFXTextField layoutX="460.0" layoutY="75.0" prefHeight="32.0" prefWidth="200.0" promptText="Display Name" />
-      <JFXButton buttonType="RAISED" layoutX="680.0" layoutY="73.0" prefHeight="32.0" prefWidth="140.0" style="-fx-background-color: #3498DB;" text="Submit Data" textFill="WHITE">
+      <JFXComboBox fx:id="cmbUserRole" layoutX="20.0" layoutY="75.0" prefHeight="32.0" prefWidth="200.0" promptText="User Role" />
+      <JFXTextField fx:id="txtUsername" layoutX="240.0" layoutY="75.0" prefHeight="32.0" prefWidth="200.0" promptText="Username" />
+      <JFXTextField fx:id="txtDisplayName" layoutX="460.0" layoutY="75.0" prefHeight="32.0" prefWidth="200.0" promptText="Display Name" />
+      <JFXButton buttonType="RAISED" layoutX="680.0" layoutY="73.0" onAction="#createSystemUserOnAction" prefHeight="32.0" prefWidth="140.0" style="-fx-background-color: #3498DB;" text="Submit Data" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font>
