@@ -7,12 +7,15 @@ import com.devstack.pos.util.KeyGenerator;
 import com.devstack.pos.view.tm.UserRoleTm;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -35,6 +38,37 @@ public class ManageUserRoleFormController {
     public JFXButton btnCancel;
 
     private UserRoleBo userRoleBo = BoFactory.getBo(BoFactory.BoType.USER_ROLE);
+
+    public void initialize() {
+        colId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colUserRole.setCellValueFactory(new PropertyValueFactory<>("roleName"));
+        colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
+        colDelete.setCellValueFactory(new PropertyValueFactory<>("delete"));
+        colModify.setCellValueFactory(new PropertyValueFactory<>("modify"));
+
+        loadAllUserRoles();
+    }
+
+    private void loadAllUserRoles() {
+        ObservableList<UserRoleTm> userRoleTms = FXCollections.observableArrayList();
+
+        for (UserRoleDto userRoleDto : userRoleBo.loadAllUserRoles()) {
+
+            Button deleteButton = new Button("Delete");
+            Button updateButton = new Button("Update");
+
+            UserRoleTm tm = new UserRoleTm(
+                    userRoleDto.getPropertyId(),
+                    userRoleDto.getRoleName(),
+                    userRoleDto.getRoleDescription(),
+                    deleteButton,
+                    updateButton
+            );
+            userRoleTms.add(tm);
+        }
+
+        tblUserRoles.setItems(userRoleTms);
+    }
 
     private void setUi(String location) throws IOException {
         Stage stage = (Stage) manageUserRoleContext.getScene().getWindow();

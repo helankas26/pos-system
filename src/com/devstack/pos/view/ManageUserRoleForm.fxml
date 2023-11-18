@@ -83,9 +83,9 @@
       <JFXTextField fx:id="txtSearchText" layoutX="20.0" layoutY="127.0" prefHeight="32.0" prefWidth="420.0" promptText="Search here" />
       <TableView fx:id="tblUserRoles" layoutX="20.0" layoutY="179.0" prefHeight="569.0" prefWidth="1326.0">
          <columns>
-            <TableColumn fx:id="colId" prefWidth="121.00003051757812" text="#Id" />
+            <TableColumn fx:id="colId" prefWidth="243.0" text="#Id" />
             <TableColumn fx:id="colUserRole" prefWidth="250.0" text="User Role" />
-            <TableColumn fx:id="colDescription" prefWidth="622.0" text="Description" />
+            <TableColumn fx:id="colDescription" prefWidth="500.0" text="Description" />
             <TableColumn fx:id="colDelete" prefWidth="164.0" text="Delete" />
             <TableColumn fx:id="colModify" prefWidth="165.0" text="Modify" />
          </columns>
