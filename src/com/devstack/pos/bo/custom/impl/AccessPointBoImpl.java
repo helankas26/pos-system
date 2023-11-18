@@ -3,10 +3,8 @@ package com.devstack.pos.bo.custom.impl;
 import com.devstack.pos.bo.custom.AccessPointBo;
 import com.devstack.pos.dao.DaoFactory;
 import com.devstack.pos.dao.custom.AccessPointDao;
-import com.devstack.pos.dto.AccessPointCrudDto;
 import com.devstack.pos.dto.AccessPointDto;
 import com.devstack.pos.entity.AccessPoint;
-import com.devstack.pos.entity.AccessPointCrud;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,18 +16,9 @@ public class AccessPointBoImpl implements AccessPointBo {
     @Override
     public List<AccessPointDto> loadAlAccessPoints() {
         List<AccessPointDto> accessPointDtos = new ArrayList<>();
-
         for (AccessPoint accessPoint : accessPointDao.loadAll()) {
-            List<AccessPointCrudDto> crudDtos = new ArrayList<>();
-
-            for (AccessPointCrud accessPointCrud : accessPoint.getAccessPointCruds()) {
-                crudDtos.add(
-                        new AccessPointCrudDto(accessPointCrud.getPropertyId(), accessPointCrud.getCrud())
-                );
-            }
-
             accessPointDtos.add(
-                    new AccessPointDto(accessPoint.getPropertyId(), accessPoint.getPointName(), crudDtos)
+                    new AccessPointDto(accessPoint.getPropertyId(), accessPoint.getPointName())
             );
         }
         return accessPointDtos;
@@ -45,19 +34,10 @@ public class AccessPointBoImpl implements AccessPointBo {
         List<AccessPointDto> accessPointDtos = new ArrayList<>();
 
         for (AccessPoint accessPoint : accessPointDao.loadAllAccessPoints(searchText)) {
-            List<AccessPointCrudDto> crudDtos = new ArrayList<>();
-
-            for (AccessPointCrud accessPointCrud : accessPoint.getAccessPointCruds()) {
-                crudDtos.add(
-                        new AccessPointCrudDto(accessPointCrud.getPropertyId(), accessPointCrud.getCrud())
-                );
-            }
-
             accessPointDtos.add(
                     new AccessPointDto(
                             accessPoint.getPropertyId(),
-                            accessPoint.getPointName(),
-                            crudDtos
+                            accessPoint.getPointName()
                     )
             );
         }

@@ -3,7 +3,7 @@ package com.devstack.pos.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -18,6 +18,6 @@ public class AccessPoint implements SuperEntity {
     @Column(name="point_name")
     private String pointName;
 
-    @OneToMany(mappedBy = "accessPoint", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<AccessPointCrud> accessPointCruds;
+    @OneToMany(mappedBy = "accessPoint")
+    private Set<AccessPointCrud> accessPointCruds;
 }

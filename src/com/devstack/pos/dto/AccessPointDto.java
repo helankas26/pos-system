@@ -2,7 +2,6 @@ package com.devstack.pos.dto;
 
 import lombok.*;
 
-import java.util.List;
 
 @Getter
 @Setter
@@ -12,5 +11,4 @@ import java.util.List;
 public class AccessPointDto {
     private Long propertyId;
     private String pointName;
-    private List<AccessPointCrudDto> accessPointCrudDtos;
 }

@@ -119,7 +119,7 @@ public class ManageAccessPointsFormController {
 
     public void createAccessPointOnAction(ActionEvent actionEvent) {
         if (accessPointBo.createAccessPoint(
-                new AccessPointDto(KeyGenerator.generateId(), txtAccessPoint.getText(), null)
+                new AccessPointDto(KeyGenerator.generateId(), txtAccessPoint.getText())
         )) {
             new Alert(Alert.AlertType.INFORMATION, "Saved!").show();
             loadAllAccessPoints();
@@ -130,7 +130,7 @@ public class ManageAccessPointsFormController {
     public void updateAccessPointOnAction(ActionEvent actionEvent) {
         if (selectedAccessPointId != null) {
             accessPointBo.updateAccessPoint(
-                    new AccessPointDto(selectedAccessPointId, txtAccessPoint.getText(), null)
+                    new AccessPointDto(selectedAccessPointId, txtAccessPoint.getText())
             );
 
             selectedAccessPointId = null;

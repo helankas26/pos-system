@@ -11,5 +11,5 @@ import lombok.*;
 public class AccessPointCrudDto {
     private Long propertyId;
     private Crud crud;
-
+    private AccessPointDto accessPointDto;
 }
