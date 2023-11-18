@@ -1,6 +1,7 @@
 package com.devstack.pos.util;
 
 import com.devstack.pos.entity.AccessPoint;
+import com.devstack.pos.entity.AccessPointCrud;
 import com.devstack.pos.entity.User;
 import com.devstack.pos.entity.UserRole;
 import org.hibernate.Session;
@@ -23,6 +24,7 @@ public class HibernateUtil {
                 .addAnnotatedClass(UserRole.class)
                 .addAnnotatedClass(User.class)
                 .addAnnotatedClass(AccessPoint.class)
+                .addAnnotatedClass(AccessPointCrud.class)
                 .getMetadataBuilder()
                 .applyImplicitNamingStrategy(ImplicitNamingStrategyJpaCompliantImpl.INSTANCE)
                 .build();
