@@ -10,4 +10,5 @@ public interface UserDao extends CrudDao<User, Long> {
     ResponseData login(String username, String password);
     List<User> loadAllUsers(String searchText);
     void createNewSystemUser(Long userRoleId, String displayName, String email);
+    void updateSystemUser(Long userRoleId, Long userId, String displayName, String email);
 }

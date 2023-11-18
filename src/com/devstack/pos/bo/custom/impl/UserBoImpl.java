@@ -85,6 +85,11 @@ public class UserBoImpl implements UserBo {
     }
 
     @Override
+    public void updateSystemUser(Long userRoleId, Long userId, String displayName, String email) {
+        userDao.updateSystemUser(userRoleId, userId, displayName, email);
+    }
+
+    @Override
     public boolean dropUser(Long userId) {
         return userDao.remove(userId);
     }

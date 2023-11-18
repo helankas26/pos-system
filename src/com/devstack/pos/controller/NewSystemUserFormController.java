@@ -6,6 +6,7 @@ import com.devstack.pos.bo.custom.UserRoleBo;
 import com.devstack.pos.dto.UserDto;
 import com.devstack.pos.dto.UserRoleDto;
 import com.devstack.pos.view.tm.SystemUserTm;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
@@ -38,6 +39,9 @@ public class NewSystemUserFormController {
     public TableColumn<SystemUserTm, String> colEmail;
     public TableColumn<SystemUserTm, Button> colDelete;
     public TableColumn<SystemUserTm, Button> colModify;
+    public JFXButton btnNew;
+    public JFXButton btnUpdate;
+    public JFXButton btnCancel;
 
     private UserRoleBo userRoleBo = BoFactory.getBo(BoFactory.BoType.USER_ROLE);
     private UserBo userBo = BoFactory.getBo(BoFactory.BoType.USER);
@@ -47,6 +51,7 @@ public class NewSystemUserFormController {
     private List<UserRoleDto> userRoleDtos = new ArrayList<>();
 
     private String searchText = "";
+    private Long selectedUserId;
 
     public void initialize() {
         colId.setCellValueFactory(new PropertyValueFactory<>("userId"));
@@ -95,13 +100,29 @@ public class NewSystemUserFormController {
 
 
             deleteButton.setOnAction(e -> {
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure?", ButtonType.YES, ButtonType.NO);
+                Alert alert = new Alert(Alert.AlertType.WARNING, "Are you sure?", ButtonType.YES, ButtonType.NO);
                 Optional<ButtonType> buttonType = alert.showAndWait();
 
                 if (buttonType.isPresent() && buttonType.get() == ButtonType.YES) {
                     if (userBo.dropUser(tm.getUserId())) {
                         loadAllSystemUser();
                     }
+                }
+            });
+
+            updateButton.setOnAction(e -> {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Do you need to update?", ButtonType.YES, ButtonType.CANCEL);
+                Optional<ButtonType> buttonType = alert.showAndWait();
+
+                if (buttonType.isPresent() && buttonType.get() == ButtonType.YES) {
+                    cmbUserRole.setValue(tm.getUserRole());
+                    txtUsername.setText(tm.getEmail());
+                    txtDisplayName.setText(tm.getDisplayName());
+                    selectedUserId = tm.getUserId();
+
+                    btnUpdate.setVisible(true);
+                    btnCancel.setVisible(true);
+                    btnNew.setVisible(false);
                 }
             });
         }
@@ -111,9 +132,14 @@ public class NewSystemUserFormController {
     }
 
     private void clearAll() {
+        btnNew.setVisible(true);
+        btnCancel.setVisible(false);
+        btnUpdate.setVisible(false);
+
         cmbUserRole.setValue(null);
         txtUsername.clear();
         txtDisplayName.clear();
+        txtSearchText.clear();
     }
 
     private void setUi(String location) throws IOException {
@@ -137,6 +163,29 @@ public class NewSystemUserFormController {
         selectedUserRoleDto.ifPresent(userRoleDto -> userBo.createNewSystemUser(userRoleDto.getPropertyId(), displayName, userName));
 
         loadAllSystemUser();
+        clearAll();
+    }
+
+    public void updateSystemUserOnAction(ActionEvent actionEvent) {
+        if (selectedUserId != null) {
+            String userRole = cmbUserRole.getValue();
+            Optional<UserRoleDto> selectedUserRoleDto =
+                    userRoleDtos.stream().filter(e -> e.getRoleName().equals(userRole)).findFirst();
+
+            String displayName = txtDisplayName.getText();
+            String userName = txtUsername.getText();
+
+            selectedUserRoleDto.ifPresent(userRoleDto -> userBo.updateSystemUser(userRoleDto.getPropertyId(), selectedUserId, displayName, userName));
+
+            selectedUserId = null;
+            loadAllSystemUser();
+
+        }
+
+        clearAll();
+    }
+
+    public void cancelOnAction(ActionEvent actionEvent) {
         clearAll();
     }
 }

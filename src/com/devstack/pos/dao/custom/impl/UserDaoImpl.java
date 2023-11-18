@@ -117,4 +117,33 @@ public class UserDaoImpl implements UserDao {
             System.out.println(createdUser.getPassword());
         }
     }
+
+    @Override
+    public void updateSystemUser(Long userRoleId, Long userId, String displayName, String email) {
+        try (Session session = HibernateUtil.getSession()) {
+            Transaction transaction = session.beginTransaction();
+            Query<User> query = session.createQuery("FROM User u WHERE u.propertyId=:id", User.class);
+            query.setParameter("id", userId);
+            User user = query.uniqueResult();
+
+            if (user != null) {
+                Query<UserRole> roleQuery = session.createQuery("FROM UserRole u WHERE u.propertyId=:roleId", UserRole.class);
+                roleQuery.setParameter("roleId", userRoleId);
+                UserRole userRole = roleQuery.uniqueResult();
+
+                if (userRole == null) {
+                    throw new RuntimeException("User Role not found!");
+                }
+
+                user.setDisplayName(displayName);
+                user.setUsername(email);
+                user.setUserRole(userRole);
+
+                session.update(user);
+                transaction.commit();
+            } else {
+                throw new RuntimeException("User not found!");
+            }
+        }
+    }
 }
