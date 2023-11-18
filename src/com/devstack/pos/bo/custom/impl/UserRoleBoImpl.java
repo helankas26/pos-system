@@ -24,8 +24,36 @@ public class UserRoleBoImpl implements UserRoleBo {
     }
 
     @Override
+    public List<UserRoleDto> loadAllUserRoles(String searchText) {
+        List<UserRoleDto> userRoleDtos = new ArrayList<>();
+
+        for (UserRole roles : userRoleDao.loadAllUserRoles(searchText)) {
+            userRoleDtos.add(
+                    new UserRoleDto(
+                            roles.getPropertyId(),
+                            roles.getRoleName(),
+                            roles.getRoleDescription())
+            );
+        }
+
+        return userRoleDtos;
+    }
+
+    @Override
     public boolean saveUserRole(UserRoleDto userRoleDto) {
         return userRoleDao.create(
+                new UserRole(userRoleDto.getPropertyId(), userRoleDto.getRoleName(), userRoleDto.getRoleDescription(), null)
+        );
+    }
+
+    @Override
+    public boolean dropUserRole(Long userRoleId) {
+        return userRoleDao.remove(userRoleId);
+    }
+
+    @Override
+    public void updateUserRole(UserRoleDto userRoleDto) {
+        userRoleDao.modify(
                 new UserRole(userRoleDto.getPropertyId(), userRoleDto.getRoleName(), userRoleDto.getRoleDescription(), null)
         );
     }

@@ -7,5 +7,8 @@ import java.util.List;
 
 public interface UserRoleBo extends SuperBo {
     List<UserRoleDto> loadAllUserRoles();
+    List<UserRoleDto> loadAllUserRoles(String searchText);
     boolean saveUserRole(UserRoleDto userRoleDto);
+    boolean dropUserRole(Long userRoleId);
+    void updateUserRole(UserRoleDto userRoleDto);
 }

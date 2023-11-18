@@ -27,12 +27,41 @@ public class UserRoleDaoImpl implements UserRoleDao {
 
     @Override
     public boolean remove(Long id) {
-        return false;
+        try (Session session = HibernateUtil.getSession()) {
+            Transaction transaction = session.beginTransaction();
+            Query<UserRole> query = session.createQuery("FROM UserRole role WHERE role.propertyId=:id", UserRole.class);
+            query.setParameter("id", id);
+            UserRole userRole = query.uniqueResult();
+
+            if (userRole != null) {
+                session.remove(userRole);
+                transaction.commit();
+                return true;
+            } else {
+                throw new RuntimeException("User Role not found!");
+            }
+        }
     }
 
     @Override
     public boolean modify(UserRole userRole) {
-        return false;
+        try (Session session = HibernateUtil.getSession()) {
+            Transaction transaction = session.beginTransaction();
+            Query<UserRole> query = session.createQuery("FROM UserRole role WHERE role.propertyId=:id", UserRole.class);
+            query.setParameter("id", userRole.getPropertyId());
+            UserRole selectedUserRole = query.uniqueResult();
+
+            if (selectedUserRole != null) {
+                selectedUserRole.setRoleName(userRole.getRoleName());
+                selectedUserRole.setRoleDescription(userRole.getRoleDescription());
+
+                session.update(selectedUserRole);
+                transaction.commit();
+                return true;
+            } else {
+                throw new RuntimeException("User Role not found!");
+            }
+        }
     }
 
     @Override
@@ -54,6 +83,15 @@ public class UserRoleDaoImpl implements UserRoleDao {
             Long count = (Long) query.getSingleResult();
 
             return count > 0;
+        }
+    }
+
+    @Override
+    public List<UserRole> loadAllUserRoles(String searchText) {
+        try (Session session = HibernateUtil.getSession()) {
+            Query<UserRole> userQuery = session.createQuery("SELECT role FROM UserRole role WHERE role.roleName LIKE :name", UserRole.class);
+            userQuery.setParameter("name", "%" + searchText + "%");
+            return userQuery.getResultList();
         }
     }
 }
