@@ -24,8 +24,4 @@ public class UserManagementFormController {
     public void manageSystemUserOnMouseClicked(MouseEvent mouseEvent) throws IOException {
         setUi("NewSystemUserForm");
     }
-
-    public void newUserRoleOnMouseClicked(MouseEvent mouseEvent) throws IOException {
-        setUi("UserRoleAndAuthoritiesForm");
-    }
 }

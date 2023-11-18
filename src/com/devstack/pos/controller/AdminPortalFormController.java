@@ -75,7 +75,8 @@ public class AdminPortalFormController {
         setUi("UserManagementForm");
     }
 
-    public void userRoleAndAuthoritiesOnAction(ActionEvent actionEvent) {
+    public void userRoleAndAuthoritiesOnAction(ActionEvent actionEvent) throws IOException {
+        setUi("UserRoleAndAuthoritiesForm");
     }
 
     public void incomeAndReportOnAction(ActionEvent actionEvent) {

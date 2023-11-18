@@ -4,6 +4,7 @@ import com.devstack.pos.dao.custom.UserRoleDao;
 import com.devstack.pos.entity.UserRole;
 import com.devstack.pos.util.HibernateUtil;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import java.util.List;
@@ -12,7 +13,9 @@ public class UserRoleDaoImpl implements UserRoleDao {
     @Override
     public boolean create(UserRole userRole) {
         try (Session session = HibernateUtil.getSession()) {
+            Transaction transaction = session.beginTransaction();
             session.save(userRole);
+            transaction.commit();
         }
         return true;
     }

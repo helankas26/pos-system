@@ -22,4 +22,11 @@ public class UserRoleBoImpl implements UserRoleBo {
         }
         return userRoleDtos;
     }
+
+    @Override
+    public boolean saveUserRole(UserRoleDto userRoleDto) {
+        return userRoleDao.create(
+                new UserRole(userRoleDto.getPropertyId(), userRoleDto.getRoleName(), userRoleDto.getRoleDescription(), null)
+        );
+    }
 }

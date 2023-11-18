@@ -18,7 +18,7 @@ public class UserRoleAndAuthoritiesFormController {
     }
 
     public void backToHomeOnMouseClicked(MouseEvent mouseEvent) throws IOException {
-        setUi("UserManagementForm");
+        setUi("AdminPortalForm");
     }
 
     public void manageUserRolesOnMouseClicked(MouseEvent mouseEvent) throws IOException {

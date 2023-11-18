@@ -58,17 +58,5 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </AnchorPane>
-      <AnchorPane layoutX="356.5" layoutY="75.0" onMouseClicked="#newUserRoleOnMouseClicked" prefHeight="175.0" prefWidth="316.5" style="-fx-background-color: ECF0F1; -fx-border-width: 0 0 0 15px; -fx-border-color: #2980B9;">
-         <children>
-            <Label layoutX="22.0" layoutY="10.0" text="New User Role">
-               <font>
-                  <Font size="25.0" />
-               </font>
-            </Label>
-         </children>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </AnchorPane>
    </children>
 </AnchorPane>
