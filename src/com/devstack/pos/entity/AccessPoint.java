@@ -2,11 +2,7 @@ package com.devstack.pos.entity;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import java.util.ArrayList;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -22,6 +18,6 @@ public class AccessPoint implements SuperEntity {
     @Column(name="point_name")
     private String pointName;
 
-    @OneToMany(mappedBy = "accessPoint")
-    private List<AccessPointCrud> accessPointCruds = new ArrayList<>();
+    @OneToMany(mappedBy = "accessPoint", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<AccessPointCrud> accessPointCruds;
 }

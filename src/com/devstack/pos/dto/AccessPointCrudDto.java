@@ -1,16 +1,15 @@
 package com.devstack.pos.dto;
 
+import com.devstack.pos.enums.Crud;
 import lombok.*;
-
-import java.util.List;
 
 @Getter
 @Setter
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class AccessPointDto {
+public class AccessPointCrudDto {
     private Long propertyId;
-    private String pointName;
-    private List<AccessPointCrudDto> accessPointCrudDtos;
+    private Crud crud;
+
 }
