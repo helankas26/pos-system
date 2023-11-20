@@ -1,6 +1,7 @@
 package com.devstack.pos.bo;
 
 import com.devstack.pos.bo.custom.impl.AccessPointBoImpl;
+import com.devstack.pos.bo.custom.impl.AccessPointCrudBoImpl;
 import com.devstack.pos.bo.custom.impl.UserBoImpl;
 import com.devstack.pos.bo.custom.impl.UserRoleBoImpl;
 
@@ -9,7 +10,7 @@ public class BoFactory {
     }
 
     public enum BoType {
-        USER, USER_ROLE, ACCESS_POINT
+        USER, USER_ROLE, ACCESS_POINT, ACCESS_POINT_CRUD
     }
 
     public static <T> T getBo(BoType type) {
@@ -20,6 +21,8 @@ public class BoFactory {
                 return (T) new UserRoleBoImpl();
             case ACCESS_POINT:
                 return (T) new AccessPointBoImpl();
+            case ACCESS_POINT_CRUD:
+                return (T) new AccessPointCrudBoImpl();
             default:
                 return null;
         }
